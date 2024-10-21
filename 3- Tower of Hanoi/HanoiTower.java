@@ -1,23 +1,27 @@
-import java.util.HashMap;
+import java.util.ArrayList;
 
 public class HanoiTower {
     private int diskCount;
-    HashMap<String, Tower> towers = new HashMap<String, Tower>();
+    ArrayList<Tower> towers = new ArrayList<Tower>();
     
     
     public HanoiTower(int diskCount) {
-        this.diskCount = diskCount;
-        towers.put("source", new Tower());
         for (int i = 3; i > 0; i--) {
-            towers.get("source").pushDisk(new Disk(i));
+            towers.add(new Tower());
+        }
+        this.diskCount = diskCount;
+        for (int i = this.diskCount; i > 0; i--) {
+            towers.get(0).pushDisk(new Disk(i));
         }
     }
 
     public void solve() {
-
+        while (towers.get(2).size() != diskCount) {
+            
+        }
     }
 
     private void moveDisk(int towerIndex) {
-
+        
     }
 }
