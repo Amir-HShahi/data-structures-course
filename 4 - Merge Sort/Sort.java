@@ -2,8 +2,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Sort {
-    static int kw = 0;
-
     public static <T extends Comparable<T>> void mergeSort(List<T> list, int start, int end) {
         if (start < end) {
             int mid = (start + end) / 2;
