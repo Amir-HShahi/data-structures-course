@@ -1,9 +1,9 @@
 public class Main {
     public static void main(String[] args) {
         try {
-            int sequenceValue = Fibonacci.getValueOf(8);
+            int sequenceValue = Fibonacci.getValueOf(-1);
             System.out.println(sequenceValue);
-        } catch (IllegalAccessException e) {
+        } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
         }
     }
