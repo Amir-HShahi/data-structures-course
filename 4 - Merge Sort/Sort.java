@@ -25,7 +25,7 @@ public class Sort {
         int k = start;
         int i = 0;
         int j = 0;
-        while ((i < leftList.size()) || (j < rightList.size())) {
+        while ((i + j) < (end - start + 1)) {
             if ((j >= rightList.size())
                     || ((i < leftList.size()) && (leftList.get(i).compareTo(rightList.get(j)) < 0))) {
                 list.set(k, leftList.get(i));
