@@ -34,6 +34,20 @@ public class MyLinkedList<T> {
         return currentNode.getData();
     }
 
+    public void reverse() {
+        Node<T> prevNode = null;
+        Node<T> keyNode = firstNode;
+        while (keyNode != null) {
+            Node<T> temp = keyNode.getNext();
+            keyNode.setNext(prevNode);
+            prevNode = keyNode;
+            keyNode = temp;
+        }
+        Node<T> temp = this.firstNode;
+        this.firstNode = this.lastNode;
+        this.lastNode = temp;
+    }
+
     public void delete(T object) {
         Node<T> previousNode = null;
         Node<T> currentNode = firstNode;
