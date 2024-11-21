@@ -1,7 +1,11 @@
 import java.util.ArrayList;
 
 public class Tower {
-    public ArrayList<Disk> disks = new ArrayList<Disk>();
+    private ArrayList<Disk> disks = new ArrayList<Disk>();
+
+    public Tower() {
+        disks.add(new Disk(100));
+    }
 
     public Boolean pushDisk(Disk disk) {
         if (disks.isEmpty()) {
@@ -14,6 +18,15 @@ public class Tower {
         } else {
             return false;
         }
+    }
+
+    @Override
+    public String toString() {
+        String tower = "";
+        for (int i = 1; i < disks.size(); i++) {
+            tower += disks.get(i).size() + ",";
+        }
+        return tower;
     }
 
     public Disk popDisk() {
