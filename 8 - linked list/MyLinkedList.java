@@ -34,6 +34,22 @@ public class MyLinkedList<T> {
         return currentNode.getData();
     }
 
+    public void removeDuplicate() {
+        Node<T> key = firstNode;
+        while (key != null) {
+            Node<T> prev = key;
+            Node<T> checkNode = key.getNext();
+            while (checkNode != null) {
+                if (checkNode.getData() == key.getData()) {
+                    prev.setNext(checkNode.getNext());
+                }
+                prev = checkNode;
+                checkNode = checkNode.getNext();
+            }
+            key = key.getNext();
+        }
+    }
+    
     public void reverse() {
         Node<T> prevNode = null;
         Node<T> keyNode = firstNode;
