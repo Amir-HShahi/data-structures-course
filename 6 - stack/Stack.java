@@ -6,17 +6,11 @@ public class Stack {
     private int top = 0;
 
     public Boolean isEmpty() {
-        if (top == 0)
-            return true;
-        else
-            return false;
+        return top == 0;
     }
 
     public Boolean isFull() {
-        if (top == capacity)
-            return true;
-        else
-            return false;
+        return top == capacity;
     }
 
     public void push(Object object) {
