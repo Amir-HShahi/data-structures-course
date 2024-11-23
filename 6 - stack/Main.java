@@ -6,6 +6,7 @@ public class Main {
             stack.push(2);
             stack.push(3);
             stack.push(4);
+            System.out.println(stack);
         } catch (StackOverflowError e) {
             System.out.println(e.getMessage());
             System.out.println(stack.pop());

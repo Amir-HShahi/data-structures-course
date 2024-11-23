@@ -1,8 +1,8 @@
 import java.util.EmptyStackException;
 
 public class Stack {
-    private int size = 3;
-    private Object[] stack = new Object[size];
+    private int capacity = 3;
+    private Object[] stack = new Object[capacity];
     private int top = 0;
 
     public Boolean isEmpty() {
@@ -13,7 +13,7 @@ public class Stack {
     }
 
     public Boolean isFull() {
-        if (top == size)
+        if (top == capacity)
             return true;
         else
             return false;
