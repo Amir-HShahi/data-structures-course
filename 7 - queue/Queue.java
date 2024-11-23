@@ -31,6 +31,7 @@ public class Queue {
             throw new RuntimeException("Queue is empty");
 
         Object dequeuedObject = queue[head];
+        queue[head] = null;
         head = (head + 1) % size;
         return dequeuedObject;
     }
