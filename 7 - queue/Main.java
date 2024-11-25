@@ -9,10 +9,10 @@ public class Main {
             System.out.println(e.getMessage());
             queue.dequeue();
             queue.dequeue();
-            // queue.dequeue();
-            queue.enqueue(1);
-            queue.enqueue(2);
-            queue.enqueue(3);
+            queue.dequeue();
+            // queue.enqueue(1);
+            // queue.enqueue(2);
+            // queue.enqueue(3);
         }
         
     }

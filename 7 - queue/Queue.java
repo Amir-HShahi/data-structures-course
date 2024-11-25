@@ -5,17 +5,11 @@ public class Queue {
     private Object[] queue = new Object[size];
 
     public Boolean isFull() {
-        if (head == (tail + 1) || ((head == 0) && (tail == size - 1)))
-            return true;
-        else
-            return false;
+        return head == (tail + 1) || ((head == 0) && (tail == size - 1));
     }
 
     public Boolean isEmpty() {
-        if (tail == head)
-            return true;
-        else
-            return false;
+        return tail == head;
     }
 
     public void enqueue(Object object) {
