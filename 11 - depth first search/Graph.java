@@ -1,5 +1,7 @@
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
 
 public class Graph {
     private int size;
@@ -13,7 +15,7 @@ public class Graph {
 
     private void initializeVertexes() {
         for (int i = 0; i < this.size; i++) {
-            vertexes.add(new Vertex(i + ""));
+            vertexes.add(new Vertex(i));
         }
     }
 
@@ -30,6 +32,40 @@ public class Graph {
         vertexes.get(secondVertex).disconnectFromVertex(vertexes.get(firstVertex));
     }
 
+    public boolean Search(String name) {
+        depthFirstSearch(vertexes.get(0));
+        breadthFirstSearch(vertexes.get(0));
+        return true;
+    }
+
+    public void depthFirstSearch(Vertex firstVertex) {
+        System.out.print(firstVertex.getName() + ", ");
+        firstVertex.isVisited = true;
+
+        for (Vertex vertex : firstVertex.connectedVertexes) {
+            if (!vertex.isVisited) {
+                depthFirstSearch(vertex);
+            }
+        }
+    }
+
+    public void breadthFirstSearch(Vertex firstVertex) {
+        Queue<Vertex> queue = new LinkedList<>();
+        
+        firstVertex.isVisited = true;
+        queue.add(firstVertex);
+        
+        while (!queue.isEmpty()) {
+            int current = queue.poll().getName();
+            System.out.print(current + " ");
+            for (Vertex x : vertexes.get(current).connectedVertexes) {
+                if (!x.isVisited) {
+                    x.isVisited = true;
+                    queue.add(x);
+                }
+            }
+        }
+    }
 
     @Override
     public String toString() {
@@ -40,23 +76,24 @@ public class Graph {
         }
         return graphString;
     }
-    
 }
 
-class Vertex {
-    private String name;
-    private List<Vertex> connectedVertexes = new LinkedList<Vertex>();
+class Vertex implements Comparable<Vertex>{
+    boolean isVisited = false;
+    private int name;
+    public List<Vertex> connectedVertexes = new LinkedList<Vertex>();
 
-    public Vertex(String name) {
+    public Vertex(int name) {
         this.name = name;
     }
 
-    public String getName() {
+    public int getName() {
         return this.name;
     }
 
     public void connectToVertex(Vertex vertex) {
         connectedVertexes.add(vertex);
+        Collections.sort(connectedVertexes);
     }
 
     public void disconnectFromVertex(Vertex vertex) {
@@ -64,11 +101,8 @@ class Vertex {
     }
 
     @Override
-    public String toString() {
-        String vertexString = "";
-        for (Vertex vertex : connectedVertexes) {
-            vertexString += this.name + " ---> " + vertex.getName() + "\n";
-        }
-        return vertexString;
+    public int compareTo(Vertex o) {
+        int gg = name - o.getName();
+        return gg;
     }
 }
