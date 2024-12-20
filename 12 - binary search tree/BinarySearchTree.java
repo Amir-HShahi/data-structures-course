@@ -18,6 +18,26 @@ public class BinarySearchTree<T extends Comparable<T>> {
         return rootNode;
     }
 
+    public Boolean contains(T data) {
+        return containsHandler(this.rootNode, data);
+    }
+
+    private Boolean containsHandler(Node<T> rootNode, T key) {
+        if (rootNode == null) {
+            return false;
+        }
+
+        if (rootNode.data == key) {
+            return true;
+        }
+
+        if (rootNode.data.compareTo(key) > 0) {
+            return containsHandler(rootNode.leftNode, key);
+        }
+
+        return containsHandler(rootNode.rightNode, key);
+    }
+
     @Override
     public String toString() {
         return inorderToString(this.rootNode);

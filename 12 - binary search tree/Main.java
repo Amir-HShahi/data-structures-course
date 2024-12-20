@@ -10,6 +10,6 @@ public class Main {
         tree.add(6);
         tree.add(-8);
 
-        System.out.println(tree);
+        System.out.println(tree.contains(5));
     }
 }
