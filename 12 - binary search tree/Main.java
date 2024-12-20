@@ -1,15 +1,15 @@
+import java.util.ArrayList;
+
 public class Main {
     public static void main(String[] args) {
         BinarySearchTree<Integer> tree = new BinarySearchTree<Integer>();
+        ArrayList<Integer> list = new ArrayList<Integer>();
+        list.add(5);
+        list.add(2);
+        list.add(3);
 
-        tree.add(5);
-        tree.add(3);
-        tree.add(7);
-        tree.add(2);
-        tree.add(4);
-        tree.add(6);
-        tree.add(-8);
+        tree.toAVLTree(list);
 
-        System.out.println(tree.contains(5));
+        System.out.println(tree);
     }
 }

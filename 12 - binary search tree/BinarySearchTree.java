@@ -1,8 +1,34 @@
+import java.util.Collections;
+import java.util.List;
+
 public class BinarySearchTree<T extends Comparable<T>> {
     private Node<T> rootNode;
 
     public void add(T data) {
         this.rootNode = addDataHandler(this.rootNode, data);
+    }
+
+    public void toAVLTree(List<T> list) {
+        Collections.sort(list);
+        this.rootNode = toAVLTreeHandler(list, 0, list.size() - 1);
+    }
+
+    private Node<T> toAVLTreeHandler(List<T> list, int start, int end) {
+        Node<T> rootNode = null;
+        if (start > end)
+            return rootNode;
+
+        if (start == end) {
+            rootNode = new Node<T>(list.get(end));
+            return rootNode;
+        }
+
+        int mid = (start + end) / 2;
+        rootNode = new Node<T>(list.get(mid));
+        rootNode.rightNode = toAVLTreeHandler(list, mid + 1, end);
+        rootNode.leftNode = toAVLTreeHandler(list, start, mid - 1);
+
+        return rootNode;
     }
 
     private Node<T> addDataHandler(Node<T> rootNode, T key) {
