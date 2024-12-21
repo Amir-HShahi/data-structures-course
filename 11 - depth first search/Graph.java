@@ -53,22 +53,25 @@ public class Graph {
         return dfsString;
     }
 
-    public void breadthFirstSearch(Vertex firstVertex) {
+    public String breadthFirstSearch(Integer startVertexIndex) {
+        markAllVertexesAsUnvisited();
+        Vertex firstVertex = this.vertexes.get(startVertexIndex);
         Queue<Vertex> queue = new LinkedList<>();
         
         firstVertex.isVisited = true;
         queue.add(firstVertex);
-        
+        String bfsString = "";
         while (!queue.isEmpty()) {
-            int current = queue.poll().getName();
-            System.out.print(current + " ");
-            for (Vertex x : vertexes.get(current).connectedVertexes) {
+            Vertex current = queue.poll();
+            bfsString += current.getName() + " ";
+            for (Vertex x : current.connectedVertexes) {
                 if (!x.isVisited) {
                     x.isVisited = true;
                     queue.add(x);
                 }
             }
         }
+        return bfsString;
     }
 
     private void markAllVertexesAsUnvisited() {
