@@ -2,6 +2,7 @@ import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
+import java.util.Stack;
 
 public class Graph {
     private int size;
@@ -32,21 +33,24 @@ public class Graph {
         vertexes.get(secondVertex).disconnectFromVertex(vertexes.get(firstVertex));
     }
 
-    public boolean Search(String name) {
-        depthFirstSearch(vertexes.get(0));
-        breadthFirstSearch(vertexes.get(0));
-        return true;
-    }
+    public String depthFirstSearch(Integer startVertexIndex) {
+        markAllVertexesAsUnvisited();
+        Stack<Vertex> stack = new Stack<Vertex>();
+        stack.push(this.vertexes.get(startVertexIndex));
 
-    public void depthFirstSearch(Vertex firstVertex) {
-        System.out.print(firstVertex.getName() + ", ");
-        firstVertex.isVisited = true;
+        String dfsString = "";
+        while (!stack.isEmpty()) {
+            Vertex poppedVertex = stack.pop();
+            dfsString += !poppedVertex.isVisited ? poppedVertex.getName() + " " :  "";
+            poppedVertex.isVisited = true;
 
-        for (Vertex vertex : firstVertex.connectedVertexes) {
-            if (!vertex.isVisited) {
-                depthFirstSearch(vertex);
+            for (Vertex vertex : poppedVertex.connectedVertexes) {
+                if (!vertex.isVisited) {
+                    stack.push(vertex);
+                }
             }
         }
+        return dfsString;
     }
 
     public void breadthFirstSearch(Vertex firstVertex) {
@@ -67,6 +71,12 @@ public class Graph {
         }
     }
 
+    private void markAllVertexesAsUnvisited() {
+        for (Vertex vertex : vertexes) {
+            vertex.isVisited = false;
+        }
+    }
+
     @Override
     public String toString() {
         String graphString = "";
@@ -78,7 +88,7 @@ public class Graph {
     }
 }
 
-class Vertex implements Comparable<Vertex>{
+class Vertex {
     boolean isVisited = false;
     private int name;
     public List<Vertex> connectedVertexes = new LinkedList<Vertex>();
@@ -93,16 +103,9 @@ class Vertex implements Comparable<Vertex>{
 
     public void connectToVertex(Vertex vertex) {
         connectedVertexes.add(vertex);
-        Collections.sort(connectedVertexes);
     }
 
     public void disconnectFromVertex(Vertex vertex) {
         connectedVertexes.remove(vertex);
-    }
-
-    @Override
-    public int compareTo(Vertex o) {
-        int gg = name - o.getName();
-        return gg;
     }
 }
