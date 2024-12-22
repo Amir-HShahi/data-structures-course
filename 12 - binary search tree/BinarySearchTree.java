@@ -64,6 +64,21 @@ public class BinarySearchTree<T extends Comparable<T>> {
         return containsHandler(rootNode.rightNode, key);
     }
 
+    public int getMaxDepth() {
+        return getMaxDepthHandler(this.rootNode);
+    }
+    
+    private int getMaxDepthHandler(Node<T> rootNode) {
+        if (rootNode == null) {
+            return 0;
+        }
+        if (rootNode.leftNode == null && rootNode.rightNode == null) {
+            return 1;
+        }
+        
+        return getMaxDepthHandler(rootNode.leftNode) >= getMaxDepthHandler(rootNode.rightNode) ? getMaxDepthHandler(rootNode.leftNode) + 1 : getMaxDepthHandler(rootNode.rightNode) + 1;
+    }
+
     @Override
     public String toString() {
         return inorderToString(this.rootNode);
