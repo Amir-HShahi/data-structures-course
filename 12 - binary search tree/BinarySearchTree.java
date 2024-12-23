@@ -4,10 +4,6 @@ import java.util.List;
 public class BinarySearchTree<T extends Comparable<T>> {
     private Node<T> rootNode;
 
-    public void add(T data) {
-        this.rootNode = addDataHandler(this.rootNode, data);
-    }
-
     public void toAVLTree(List<T> list) {
         Collections.sort(list);
         this.rootNode = toAVLTreeHandler(list, 0, list.size() - 1);
@@ -29,6 +25,10 @@ public class BinarySearchTree<T extends Comparable<T>> {
         rootNode.leftNode = toAVLTreeHandler(list, start, mid - 1);
 
         return rootNode;
+    }
+
+    public void add(T data) {
+        this.rootNode = addDataHandler(this.rootNode, data);
     }
 
     private Node<T> addDataHandler(Node<T> rootNode, T key) {
@@ -67,7 +67,7 @@ public class BinarySearchTree<T extends Comparable<T>> {
     public int getMaxDepth() {
         return getMaxDepthHandler(this.rootNode);
     }
-    
+
     private int getMaxDepthHandler(Node<T> rootNode) {
         if (rootNode == null) {
             return 0;
@@ -75,8 +75,10 @@ public class BinarySearchTree<T extends Comparable<T>> {
         if (rootNode.leftNode == null && rootNode.rightNode == null) {
             return 1;
         }
-        
-        return getMaxDepthHandler(rootNode.leftNode) >= getMaxDepthHandler(rootNode.rightNode) ? getMaxDepthHandler(rootNode.leftNode) + 1 : getMaxDepthHandler(rootNode.rightNode) + 1;
+
+        return getMaxDepthHandler(rootNode.leftNode) >= getMaxDepthHandler(rootNode.rightNode)
+                ? getMaxDepthHandler(rootNode.leftNode) + 1
+                : getMaxDepthHandler(rootNode.rightNode) + 1;
     }
 
     @Override
