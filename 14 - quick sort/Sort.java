@@ -1,11 +1,11 @@
 import java.util.List;
 
 public class Sort {
-    public static void quick(List<Integer> list) {
+    public static <T extends Comparable<T>> void quick(List<T> list) {
         quickSortHandler(list, 0, list.size() - 1);
     }
 
-    private static void quickSortHandler(List<Integer> list, int start, int end) {
+    private static <T extends Comparable<T>> void quickSortHandler(List<T> list, int start, int end) {
         if (start < end) {
             int pivotIndex = partition(list, start, end);
             quickSortHandler(list, pivotIndex + 1, end);
@@ -13,8 +13,8 @@ public class Sort {
         }
     }
 
-    private static Integer partition(List<Integer> list, int start, int end) {
-        Integer pivot = list.get(start);
+    private static <T extends Comparable<T>> Integer partition(List<T> list, int start, int end) {
+        T pivot = list.get(start);
         int i = start + 1;
         int j = end;
         while (i <= j) {
@@ -32,8 +32,8 @@ public class Sort {
         return j;   
     }
 
-    private static void swap(List<Integer> list, int first, int second) {
-        Integer temp = list.get(first);
+    private static <T extends Comparable<T>> void swap(List<T> list, int first, int second) {
+        T temp = list.get(first);
         list.set(first, list.get(second));
         list.set(second, temp);
     }
