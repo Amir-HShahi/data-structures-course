@@ -18,16 +18,18 @@ public class Sort {
         int i = start + 1;
         int j = end;
         while (i <= j) {
-            if (pivot.compareTo(list.get(i)) < 0) {
-                while (pivot.compareTo(list.get(j)) < 0) {
-                    j--;
-                }
+            while (i <= j && (list.get(i).compareTo(pivot) <= 0)) {
+                i++;
+            }
+            while (i <= j && (list.get(j).compareTo(pivot) > 0)) {
+                j--;
+            }
+            if (i < j) {
                 swap(list, i, j);
             }
-            i++;
         }
-        swap(list, start, i - 1);
-        return i - 1;   
+        swap(list, start, j);
+        return j;   
     }
 
     private static void swap(List<Integer> list, int first, int second) {
